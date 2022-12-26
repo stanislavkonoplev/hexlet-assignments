@@ -8,32 +8,28 @@ import java.util.List;
 public class App {
 
     public static boolean scrabble(String symbolKit, String word) {
-        boolean result = false;
-        List<String> symbolListOfSymbolKit = makeList(symbolKit);
-        List<String> symbolListOfWord = makeList(word);
+        List<String> symbols = makeList(symbolKit);
+        List<String> lettersOfWord = makeList(word);
 
-        for (String letter: symbolListOfWord) {
-            if (symbolListOfSymbolKit.contains(letter)) {
-                result = true;
-            } else {
-                result = false;
-                break;
+        for (String letter: lettersOfWord) {
+            if (!symbols.contains(letter)) {
+                return false;
             }
-            symbolListOfSymbolKit.remove(letter);
+            symbols.remove(letter);
         }
 
-        return result;
+        return true;
     }
 
     private static List<String> makeList(String symbolKit) {
-        var charsSymbolKit = symbolKit.toCharArray();
-        List<String> listOfSymbolKit = new ArrayList<>();
+        var symbols = symbolKit.split("");
+        List<String> listOfSymbols = new ArrayList<>();
 
-        for (char symbol: charsSymbolKit) {
-            listOfSymbolKit.add(String.valueOf(symbol).toLowerCase());
+        for (String symbol: symbols) {
+            listOfSymbols.add(symbol.toLowerCase());
         }
 
-        return listOfSymbolKit;
+        return listOfSymbols;
     }
 }
 //END
